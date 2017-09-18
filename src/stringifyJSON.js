@@ -8,7 +8,7 @@ var stringifyJSON = function(obj) {
   var results = '';
 
   results = convertToString(obj);
-  console.log(results);
+  console.log('results: ' + results);
   return results;
 };
 
@@ -54,6 +54,8 @@ var convertToString = function (element){
   } else if (typeof element === "object"){
     var keys = Object.keys(element);
     var values = Object.values(element);
+    //var isAnIgnoreType = typeof values[i] === 'undefined' || typeof values[i] === 'function' || typeof values[i] === 'symbol';
+    
     if (values.length === 0){
       string += '{}';
     } else {
@@ -61,13 +63,11 @@ var convertToString = function (element){
         if (i === 0){
           string += '{';
         } 
-        if (typeof values[i] !== 'undefined' || typeof values[i] !== 'function' || typeof values[i] !== 'symbol'){
-
-        } else {
+        if (typeof values[i] !== 'undefined' && typeof values[i] !== 'function' && typeof values[i] !== 'symbol'){
           string += '\"' + keys[i] + '\"' + ':' + convertToString(values[i]);
-        }
+        } 
         
-        if (i !== values.length - 1){
+        if (i !== values.length - 1 && (typeof values[i] !== 'undefined' && typeof values[i] !== 'function' && typeof values[i] !== 'symbol')){
           string += ',';
         }
         if (i === values.length - 1){
