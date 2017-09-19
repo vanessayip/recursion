@@ -54,8 +54,8 @@ var convertToString = function (element){
   } else if (typeof element === "object"){
     var keys = Object.keys(element);
     var values = Object.values(element);
-    //var isAnIgnoreType = typeof values[i] === 'undefined' || typeof values[i] === 'function' || typeof values[i] === 'symbol';
-    
+    //var isAStringifyType = typeof values[i] !== 'undefined' && typeof values[i] !== 'function' && typeof values[i] !== 'symbol';
+    //console.log('isStringify: ' + isAStringifyType);
     if (values.length === 0){
       string += '{}';
     } else {
@@ -64,6 +64,7 @@ var convertToString = function (element){
           string += '{';
         } 
         if (typeof values[i] !== 'undefined' && typeof values[i] !== 'function' && typeof values[i] !== 'symbol'){
+          //console.log('isAStringifyType: ' + (typeof values[i] !== 'undefined' && typeof values[i] !== 'function' && typeof values[i] !== 'symbol'));
           string += '\"' + keys[i] + '\"' + ':' + convertToString(values[i]);
         } 
         
